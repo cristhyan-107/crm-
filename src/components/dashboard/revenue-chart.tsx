@@ -25,40 +25,43 @@ export function RevenueChart() {
             <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-              <XAxis 
-                dataKey="name" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} 
+              <XAxis
+                dataKey="name"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                 dy={10}
               />
-              <YAxis 
-                axisLine={false} 
-                tickLine={false} 
+              <YAxis
+                axisLine={false}
+                tickLine={false}
                 tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
-                tickFormatter={(value) => `R$${value/1000}k`}
+                tickFormatter={(value) => `R$${value / 1000}k`}
               />
               <Tooltip
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--background))', 
+                contentStyle={{
+                  backgroundColor: 'hsl(var(--background))',
                   borderColor: 'hsl(var(--border))',
                   borderRadius: '8px'
                 }}
                 itemStyle={{ color: 'hsl(var(--foreground))' }}
-                formatter={(value: number) => [`R$ ${value.toLocaleString('pt-BR')}`, 'Receita']}
+                formatter={(value) => [
+                  `R$ ${Number(value ?? 0).toLocaleString("pt-BR")}`,
+                  "Receita",
+                ]}
               />
-              <Area 
-                type="monotone" 
-                dataKey="value" 
-                stroke="var(--chart-1)" 
+              <Area
+                type="monotone"
+                dataKey="value"
+                stroke="var(--chart-1)"
                 strokeWidth={3}
-                fillOpacity={1} 
-                fill="url(#colorValue)" 
+                fillOpacity={1}
+                fill="url(#colorValue)"
               />
             </AreaChart>
           </ResponsiveContainer>
